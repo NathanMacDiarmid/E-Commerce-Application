@@ -8,14 +8,12 @@ public class StoreManager {
     /**
      * Initializes two new ArrayLists from Inventory class.
      */
-
     private Inventory inventory = null;
     private String name;
 
     /**
      * Main constructor.
      */
-
     public StoreManager(String iName) {
         this.name = iName;
         this.inventory = new Inventory();
@@ -24,40 +22,42 @@ public class StoreManager {
     /**
      * This method is made to keep the Inventory private but still accessible.
      */
-
     public Inventory getInventory() {
 
         return this.inventory;
 
     }
 
+    /**
+     * Returns the stock for a given product ID
+     */
     public int managerGetStock(int productID) {
 
         return this.inventory.getStock(productID);
 
     }
 
-    public float transactionTotal(ArrayList<ArrayList<Integer>> product) {
+    /**
+     * This method processes transactions, its parameter is a 2D ArrayList where every ArrayList
+     * inside the ArrayList represents a product. These ArrayLists inside the main ArrayList consist
+     * of 2 integers. The first integer represents the product ID and the second represents the stock
+     * amount. This method will then subtract the stock from the inventory if possible and then return
+     * the total cost if successful or -1 if unsuccessful.
+     */
+    public float transactionTotal(ArrayList<ArrayList<Integer>> shoppingCart) {
         float priceTotal = 0;
         float amount;
 
-        for (int i = 0; i < product.size(); i++){
-            for (int j = 0; j < product.get(i).size(); j++) {
-
-                amount = managerGetStock(product.get(i).get(0));
-
-                if (amount < product.get(i).get(1)) {
-                    return -1;
-                }
-
-                else {
-
-                    priceTotal += this.inventory.getProductInfo(product.get(i).get(0)).getPrice() * product.get(i).get(1) / product.size();
-                    boolean removalSuccess = this.inventory.removeStock(product.get(i).get(0), product.get(i).get(1));
-
-                }
-
+        for (int i = 0; i < shoppingCart.size(); i++){
+            amount = managerGetStock(shoppingCart.get(i).get(0));
+            if (amount < shoppingCart.get(i).get(1)) {
+                return -1;
             }
+        }
+
+        for (int i = 0; i < shoppingCart.size(); i++){
+            priceTotal += this.inventory.getProductInfo(shoppingCart.get(i).get(0)).getPrice() * shoppingCart.get(i).get(1);
+            boolean removalSuccess = this.inventory.removeStock(shoppingCart.get(i).get(0), shoppingCart.get(i).get(1));
         }
         return priceTotal;
     }
