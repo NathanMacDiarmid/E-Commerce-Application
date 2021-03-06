@@ -29,7 +29,7 @@ public class Inventory {
         boolean inInventory = false;
         int previousStock = 0;
         for (int i = 0; i < inventoryProducts.size(); i++){
-            if (inventoryProducts.get(i) == product){
+            if (inventoryProducts.get(i).getId() == product.getId()){
                 inInventory = true;
                 previousStock = inventoryStock.get(i);
                 inventoryStock.set(i, previousStock + stockToAdd);
@@ -49,7 +49,7 @@ public class Inventory {
         int previousStock = 0;
         for (int i = 0; i < inventoryProducts.size(); i++){
             if (inventoryProducts.get(i).getId() == productID){
-                if((inventoryStock.get(i) - stockToRemove) > 0){
+                if((inventoryStock.get(i) - stockToRemove) >= 0){
                     previousStock = inventoryStock.get(i);
                     inventoryStock.set(i, previousStock - stockToRemove);
                     return true;
