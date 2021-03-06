@@ -7,6 +7,9 @@ public class Product {
     private int id;
     private float price;
 
+    /**
+     * Main Constructor
+     */
     public Product(String newName, int newId, float newPrice) {
 
         this.name = newName;
@@ -15,18 +18,27 @@ public class Product {
 
     }
 
+    /**
+     * Returns name of product
+     */
     public String getName() {
 
         return name;
 
     }
 
+    /**
+     * Returns ID of product
+     */
     public int getId() {
 
         return id;
 
     }
 
+    /**
+     * Returns price of product
+     */
     public float getPrice() {
 
         return price;
