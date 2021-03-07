@@ -31,28 +31,41 @@ public class StoreManager {
     }
 
     /**
-     * This method processes transactions, its parameter is a 2D ArrayList where every ArrayList
-     * inside the ArrayList represents a product. These ArrayLists inside the main ArrayList consist
-     * of 2 integers. The first integer represents the product ID and the second represents the stock
-     * amount. This method will then subtract the stock from the inventory if possible and then return
-     * the total cost if successful or -1 if unsuccessful.
+     * This method returns the total price of items in a specified cart
+     * @param cartID
+     * @return float
      */
-    public float transactionTotal(ArrayList<ArrayList<Integer>> shoppingCart) {
+    public float getPrice(int cartID){
         float priceTotal = 0;
-        float amount;
 
-        for (int i = 0; i < shoppingCart.size(); i++){
-            amount = managerGetStock(shoppingCart.get(i).get(0));
-            if (amount < shoppingCart.get(i).get(1)) {
-                return -1;
-            }
+        for(int i = 0; i < this.shoppingCarts.get(cartID).getProduct().size(); i++){
+            priceTotal += this.shoppingCarts.get(cartID).getProduct().get(i).getPrice() * this.shoppingCarts.get(cartID).getStock().get(i);
         }
 
-        for (int i = 0; i < shoppingCart.size(); i++){
-            priceTotal += this.inventory.getProductInfo(shoppingCart.get(i).get(0)).getPrice() * shoppingCart.get(i).get(1);
-            boolean removalSuccess = this.inventory.removeStock(shoppingCart.get(i).get(0), shoppingCart.get(i).get(1));
-        }
         return priceTotal;
+    }
+
+    /**
+     * Method to help the StoreView by printing all of the contents in a specified shopping cart
+     * @param cartID
+     */
+    public void printCart(int cartID){
+        System.out.println("CART ID: " + cartID);
+
+        System.out.println("|-------------------------CART CONTENTS-------------------------|");
+
+        System.out.println("Amount | Product Name | Unit Price | Product ID");
+
+        for (int i = 0; i < this.shoppingCarts.get(cartID).getProduct().size(); i++) {
+            String s = String.format(
+                    "%d | %s | %.2f | (%d)\n",
+                    this.shoppingCarts.get(cartID).getStock().get(i),
+                    this.shoppingCarts.get(cartID).getProduct().get(i).getName(),
+                    this.shoppingCarts.get(cartID).getProduct().get(i).getPrice(),
+                    this.shoppingCarts.get(cartID).getProduct().get(i).getId()
+            );
+            System.out.println(s);
+        }
     }
 
     /**
@@ -62,7 +75,7 @@ public class StoreManager {
      */
     public int assignNewCartID(){
         ShoppingCart sc = new ShoppingCart();
-        shoppingCarts.add(sc);
+        this.shoppingCarts.add(sc);
         return cartIDs++;
     }
 
@@ -96,6 +109,16 @@ public class StoreManager {
             return true;
         }
         return false;
+    }
+
+    /**
+     * this method returns all of the products in a cart back to the inventory
+     * @param cartID
+     */
+    public void cartQuit(int cartID){
+        for(int i = 0; i < this.shoppingCarts.get(cartID).getProduct().size(); i++){
+            this.inventory.addStock(this.shoppingCarts.get(cartID).getProduct().get(i), this.shoppingCarts.get(cartID).getStock().get(i));
+        }
     }
 
 

@@ -71,10 +71,18 @@ public class Inventory {
         return -1;
     }
 
+    /**
+     * returns the inventoryStock ArrayList
+     * @return ArrayList<Integer>
+     */
     public ArrayList<Integer> getStock() {
         return this.inventoryStock;
     }
 
+    /**
+     * returns the inventoryProducts ArrayList
+     * @return ArrayList<Product>
+     */
     public ArrayList<Product> getProduct() {
         return this.inventoryProducts;
     }
