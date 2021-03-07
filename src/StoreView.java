@@ -7,14 +7,22 @@ public class StoreView {
     private StoreManager storeManager;
     private final int CART_ID;
 
+    /**
+     * Constructor
+     * @param storeManager
+     * @param iD
+     */
     public StoreView(StoreManager storeManager, int iD){
         this.storeManager = storeManager;
         this.CART_ID = iD;
     }
 
-    public void GUI() {
+    /**
+     * method to print out the current cart id as well as all of the inventory
+     */
+    public void printGUI() {
 
-        System.out.println("CART ID: " + CART_ID);
+        System.out.println("CART ID: " + this.CART_ID);
 
         System.out.println("|-------------------------THE CONVENIENT STORE-------------------------|");
 
@@ -30,14 +38,17 @@ public class StoreView {
             );
             System.out.println(s);
         }
-
     }
 
+
+    /**
+     * this method accepts a command from the user and then completes it then returns a boolean,
+     * if it returns false the storeview is still active, if true then the storeview gets deactivated
+     * @return boolean
+     */
     public boolean displayGUI() {
 
-        System.out.println("CART ID: " + CART_ID);
-
-        System.out.println("|-------------------------THE CONVENIENT STORE-------------------------|");
+        printGUI();
 
         System.out.println("Enter a command...");
         System.out.println("Type 'help' for a list of commands.\n");
@@ -46,12 +57,12 @@ public class StoreView {
         String choice = scanner.next();
 
         if (choice.equals("add")) {
-            GUI();
+            printGUI();
             System.out.println("Enter a product id...");
             int product = scanner.nextInt();
             System.out.println("How much...");
             int amount = scanner.nextInt();
-            if (storeManager.cartAddProduct(CART_ID, product, amount)) {
+            if (this.storeManager.cartAddProduct(this.CART_ID, product, amount)) {
                 return false;
             }
 
@@ -60,12 +71,12 @@ public class StoreView {
         }
 
         else if (choice.equals("remove")) {
-            GUI();
+            printGUI();
             System.out.println("Enter a product id...");
             int product = scanner.nextInt();
             System.out.println("How much...");
             int amount = scanner.nextInt();
-            if (storeManager.cartRemoveProduct(CART_ID, product, amount)) {
+            if (this.storeManager.cartRemoveProduct(this.CART_ID, product, amount)) {
                 return false;
             }
 
@@ -74,7 +85,12 @@ public class StoreView {
         }
 
         else if (choice.equals("browse")) {
-            GUI();
+            printGUI();
+            return false;
+        }
+
+        else if(choice.equals("view")){
+            this.storeManager.printCart(this.CART_ID);
             return false;
         }
 
@@ -83,14 +99,19 @@ public class StoreView {
             System.out.println("quit -> leave the StoreView and quit the StoreView");
             System.out.println("browse -> shows all the inventory in each StoreView");
             System.out.println("add -> enters the add GUI and you are able to select the product and amount you want to add to your cart");
-            System.out.println("remove -> enters the add GUI and you are able to select the product and amount you want to remove from your cart\n");
+            System.out.println("remove -> enters the add GUI and you are able to select the product and amount you want to remove from your cart");
+            System.out.println("view -> views the contents in your cart\n");
+            return false;
         }
 
         else if (choice.equals("checkout")) {
+            this.storeManager.printCart(this.CART_ID);
+            System.out.println("Your transaction total is $" + storeManager.getPrice(this.CART_ID));
             return true;
         }
 
         else if (choice.equals("quit")) {
+            this.storeManager.cartQuit(this.CART_ID);
             return true;
         }
 

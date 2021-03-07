@@ -3,6 +3,9 @@
 
 public class ShoppingCart extends Inventory{
 
+    /**
+     * default constructor
+     */
     public ShoppingCart(){
         super();
     }
