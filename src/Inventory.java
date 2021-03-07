@@ -35,7 +35,7 @@ public class Inventory {
                 inventoryStock.set(i, previousStock + stockToAdd);
             }
         }
-        if(inInventory == false){
+        if(!inInventory){
             inventoryProducts.add(product);
             inventoryStock.add(stockToAdd);
         }
@@ -71,13 +71,21 @@ public class Inventory {
         return -1;
     }
 
+    public ArrayList<Integer> getStock() {
+        return this.inventoryStock;
+    }
+
+    public ArrayList<Product> getProduct() {
+        return this.inventoryProducts;
+    }
+
     /**
      * Will return product object for product ID
      */
     public Product getProductInfo(int productID){
-        for (int i = 0; i < inventoryProducts.size(); i++){
-            if (inventoryProducts.get(i).getId() == productID){
-                return inventoryProducts.get(i);
+        for (Product inventoryProduct : inventoryProducts) {
+            if (inventoryProduct.getId() == productID) {
+                return inventoryProduct;
             }
         }
         return null;

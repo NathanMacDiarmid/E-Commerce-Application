@@ -4,7 +4,7 @@
 import java.util.ArrayList;
 
 public class StoreManager {
-    private static int cardIDs = 0;
+    private static int cartIDs = 0;
     private Inventory inventory;
     private ArrayList<ShoppingCart> shoppingCarts;
 
@@ -63,7 +63,7 @@ public class StoreManager {
     public int assignNewCartID(){
         ShoppingCart sc = new ShoppingCart();
         shoppingCarts.add(sc);
-        return cardIDs++;
+        return cartIDs++;
     }
 
     /**
@@ -75,7 +75,7 @@ public class StoreManager {
      * @return boolean
      */
     public boolean cartAddProduct(int cartID, int productID, int productAmount){
-        if(this.inventory.removeStock(productID, productAmount) == true){
+        if(this.inventory.removeStock(productID, productAmount)){
             this.shoppingCarts.get(cartID).addStock(this.inventory.getProductInfo(productID), productAmount);
             return true;
         }
