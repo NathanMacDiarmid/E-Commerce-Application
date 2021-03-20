@@ -1,3 +1,4 @@
+package store;
 // Nathan MacDiarmid 101098993
 // Matthew Belanger 101144323
 
@@ -26,12 +27,12 @@ public class StoreView {
 
         System.out.println("|-------------------------THE CONVENIENT STORE-------------------------|");
 
-        System.out.println("Stock | Product Name | Unit Price | Product ID");
+        System.out.println("Stock | store.Product Name | Unit Price | store.Product ID");
 
         for (int i = 0; i < storeManager.getInventory().getProduct().size(); i++) {
             String s = String.format(
                     "%d | %s | %.2f | (%d)\n",
-                    storeManager.getInventory().getStock().get(i),
+                    storeManager.getInventory().getStockList().get(i),
                     storeManager.getInventory().getProduct().get(i).getName(),
                     storeManager.getInventory().getProduct().get(i).getPrice(),
                     storeManager.getInventory().getProduct().get(i).getId()
@@ -95,9 +96,9 @@ public class StoreView {
         }
 
         else if (choice.equals("help")) {
-            System.out.println("checkout -> ends the current StoreView by checking out and is charged by StoreManager");
-            System.out.println("quit -> leave the StoreView and quit the StoreView");
-            System.out.println("browse -> shows all the inventory in each StoreView");
+            System.out.println("checkout -> ends the current store.StoreView by checking out and is charged by store.StoreManager");
+            System.out.println("quit -> leave the store.StoreView and quit the store.StoreView");
+            System.out.println("browse -> shows all the inventory in each store.StoreView");
             System.out.println("add -> enters the add GUI and you are able to select the product and amount you want to add to your cart");
             System.out.println("remove -> enters the add GUI and you are able to select the product and amount you want to remove from your cart");
             System.out.println("view -> views the contents in your cart\n");
