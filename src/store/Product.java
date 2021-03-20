@@ -13,9 +13,15 @@ public class Product {
      */
     public Product(String newName, int newId, float newPrice) {
 
-        this.name = newName;
-        this.id = newId;
-        this.price = newPrice;
+        if (newId < 0 || newPrice < 0) {
+            throw new IllegalArgumentException("Cannot have negative id or price.");
+        }
+
+        else {
+            this.name = newName;
+            this.id = newId;
+            this.price = newPrice;
+        }
 
     }
 
