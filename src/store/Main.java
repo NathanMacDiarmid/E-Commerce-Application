@@ -9,10 +9,12 @@ public class Main {
 
         Product p1 = new Product("apple", 1, 1.0f);
         Product p2 = new Product("banana", 2, 1.0f);
+        //Product p3 = new Product(null, 3, 1.0f);
 
         newManager.getInventory().addStock(p1, 30);
         newManager.getInventory().addStock(p2, 30);
-        newManager.getInventory().printProducts();
+        //newManager.getInventory().addStock(p3, 30);
+        System.out.println(newManager.getInventory().getProductInfo(0));
 
         //System.out.println(newManager.managerGetStock(1));
 

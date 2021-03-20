@@ -2,6 +2,9 @@ package store;
 // Nathan MacDiarmid 101098993
 // Matthew Belanger 101144323
 
+import jdk.internal.util.xml.impl.Input;
+
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class StoreView {
@@ -12,10 +15,17 @@ public class StoreView {
      * Constructor
      * @param storeManager
      * @param iD
+     *
+     * Raises a IllegalArgumentException if the id is negative
      */
     public StoreView(StoreManager storeManager, int iD){
-        this.storeManager = storeManager;
-        this.CART_ID = iD;
+        if (iD < 0) {
+            throw new IllegalArgumentException("ID cannot be negative.");
+        }
+        else {
+            this.storeManager = storeManager;
+            this.CART_ID = iD;
+        }
     }
 
     /**
@@ -133,7 +143,15 @@ public class StoreView {
         Scanner sc = new Scanner(System.in);
         while (activeSV > 0) {
             System.out.print("CHOOSE YOUR STOREVIEW >>> ");
-            int choice = sc.nextInt();
+            int choice = -1;
+            try {
+                choice = sc.nextInt();
+                System.out.println(choice);
+            }
+            catch (Exception e) {
+                System.out.println("\nNOT A VALID SELECTION\n");
+            }
+            sc.next();
             if (choice < users.length && choice >= 0) {
                 if (users[choice] != null) {
                     String chooseAnother = "";
@@ -158,6 +176,7 @@ public class StoreView {
                                 0, users.length - 1)
                 );
             }
+
         }
         System.out.println("ALL STOREVIEWS DEACTIVATED");
     }

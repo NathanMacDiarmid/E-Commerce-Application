@@ -114,7 +114,7 @@ public class StoreManager {
      * @return boolean
      */
     public boolean cartRemoveProduct(int cartID, int productID, int productAmount){
-        if(this.shoppingCarts.get(cartID).removeStock(productID, productAmount) == true){
+        if(this.shoppingCarts.get(cartID).removeStock(productID, productAmount)){
             this.inventory.addStock(this.inventory.getProductInfo(productID), productAmount);
             return true;
         }
