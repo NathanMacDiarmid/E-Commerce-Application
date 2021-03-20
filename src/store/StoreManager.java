@@ -1,3 +1,4 @@
+package store;
 // Nathan MacDiarmid 101098993
 // Matthew Belanger 101144323
 
@@ -17,10 +18,19 @@ public class StoreManager {
     }
 
     /**
-     * This method is made to keep the Inventory private but still accessible.
+     * returns the inventory attribute
+     * @return
      */
     public Inventory getInventory() {
         return this.inventory;
+    }
+
+    /**
+     * returns the shoppingCarts attribute
+     * @return
+     */
+    public ArrayList<ShoppingCart> getShoppingCarts() {
+        return this.shoppingCarts;
     }
 
     /**
@@ -39,14 +49,14 @@ public class StoreManager {
         float priceTotal = 0;
 
         for(int i = 0; i < this.shoppingCarts.get(cartID).getProduct().size(); i++){
-            priceTotal += this.shoppingCarts.get(cartID).getProduct().get(i).getPrice() * this.shoppingCarts.get(cartID).getStock().get(i);
+            priceTotal += this.shoppingCarts.get(cartID).getProduct().get(i).getPrice() * this.shoppingCarts.get(cartID).getStockList().get(i);
         }
 
         return priceTotal;
     }
 
     /**
-     * Method to help the StoreView by printing all of the contents in a specified shopping cart
+     * Method to help the store.StoreView by printing all of the contents in a specified shopping cart
      * @param cartID
      */
     public void printCart(int cartID){
@@ -54,12 +64,12 @@ public class StoreManager {
 
         System.out.println("|-------------------------CART CONTENTS-------------------------|");
 
-        System.out.println("Amount | Product Name | Unit Price | Product ID");
+        System.out.println("Amount | store.Product Name | Unit Price | store.Product ID");
 
         for (int i = 0; i < this.shoppingCarts.get(cartID).getProduct().size(); i++) {
             String s = String.format(
                     "%d | %s | %.2f | (%d)\n",
-                    this.shoppingCarts.get(cartID).getStock().get(i),
+                    this.shoppingCarts.get(cartID).getStockList().get(i),
                     this.shoppingCarts.get(cartID).getProduct().get(i).getName(),
                     this.shoppingCarts.get(cartID).getProduct().get(i).getPrice(),
                     this.shoppingCarts.get(cartID).getProduct().get(i).getId()
@@ -69,8 +79,8 @@ public class StoreManager {
     }
 
     /**
-     * method to create a new ShoppingCart and add it too the shoppingCarts and return the unique
-     * ID that represents that ShoppingCart
+     * method to create a new store.ShoppingCart and add it too the shoppingCarts and return the unique
+     * ID that represents that store.ShoppingCart
      * @return int
      */
     public int assignNewCartID(){
@@ -117,7 +127,7 @@ public class StoreManager {
      */
     public void cartQuit(int cartID){
         for(int i = 0; i < this.shoppingCarts.get(cartID).getProduct().size(); i++){
-            this.inventory.addStock(this.shoppingCarts.get(cartID).getProduct().get(i), this.shoppingCarts.get(cartID).getStock().get(i));
+            this.inventory.addStock(this.shoppingCarts.get(cartID).getProduct().get(i), this.shoppingCarts.get(cartID).getStockList().get(i));
         }
     }
 

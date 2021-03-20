@@ -1,3 +1,4 @@
+package store;
 // Nathan MacDiarmid 101098993
 // Matthew Belanger 101144323
 
@@ -8,7 +9,7 @@ public class Product {
     private float price;
 
     /**
-     * Main Constructor
+     * store.Main Constructor
      */
     public Product(String newName, int newId, float newPrice) {
 

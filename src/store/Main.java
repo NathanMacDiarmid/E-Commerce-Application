@@ -1,5 +1,6 @@
+package store;
+
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
@@ -36,14 +37,14 @@ public class Main {
         //System.out.println(newManager.managerGetStock(1));
         //System.out.println(newManager.managerGetStock(2));
 
-        //StoreView sv1 = new StoreView(newManager, newManager.assignNewCartID());
+        //store.StoreView sv1 = new store.StoreView(newManager, newManager.assignNewCartID());
         //sv1.displayGUI();
 
-        //StoreManager sm = new StoreManager();
-        /*StoreView sv1 = new StoreView(newManager, newManager.assignNewCartID());
-        StoreView sv2 = new StoreView(newManager, newManager.assignNewCartID());
-        StoreView sv3 = new StoreView(newManager, newManager.assignNewCartID());
-        StoreView[] users = {sv1, sv2, sv3};
+        //store.StoreManager sm = new store.StoreManager();
+        /*store.StoreView sv1 = new store.StoreView(newManager, newManager.assignNewCartID());
+        store.StoreView sv2 = new store.StoreView(newManager, newManager.assignNewCartID());
+        store.StoreView sv3 = new store.StoreView(newManager, newManager.assignNewCartID());
+        store.StoreView[] users = {sv1, sv2, sv3};
         int activeSV = users.length;
         Scanner sc = new Scanner(System.in);
         while (activeSV > 0) {

@@ -1,3 +1,4 @@
+package store;
 // Matthew Belanger 101144323
 // Nathan MacDiarmid 101098993
 
@@ -7,7 +8,7 @@ import java.util.ArrayList;
 public class Inventory {
 
     /**
-     * Attributes are two ArrayLists, one to hold the Product objects and the other to hold the
+     * Attributes are two ArrayLists, one to hold the store.Product objects and the other to hold the
      * corresponding stock.
      */
     private ArrayList<Product> inventoryProducts = null;
@@ -22,8 +23,8 @@ public class Inventory {
     }
 
     /**
-     * If the Product object is already in the inventory then this method just increases the stock,
-     * if it is not then the Product object is added along with the stock.
+     * If the store.Product object is already in the inventory then this method just increases the stock,
+     * if it is not then the store.Product object is added along with the stock.
      */
     public void addStock(Product product, int stockToAdd){
         boolean inInventory = false;
@@ -75,13 +76,13 @@ public class Inventory {
      * returns the inventoryStock ArrayList
      * @return ArrayList<Integer>
      */
-    public ArrayList<Integer> getStock() {
+    public ArrayList<Integer> getStockList() {
         return this.inventoryStock;
     }
 
     /**
      * returns the inventoryProducts ArrayList
-     * @return ArrayList<Product>
+     * @return ArrayList<store.Product>
      */
     public ArrayList<Product> getProduct() {
         return this.inventoryProducts;
