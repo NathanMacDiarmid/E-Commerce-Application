@@ -2,9 +2,6 @@ package store;
 // Nathan MacDiarmid 101098993
 // Matthew Belanger 101144323
 
-import jdk.internal.util.xml.impl.Input;
-
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class StoreView {
@@ -126,6 +123,7 @@ public class StoreView {
             return true;
         }
 
+        System.out.println("Not a valid command \n");
         return false;
     }
 
@@ -150,8 +148,8 @@ public class StoreView {
             }
             catch (Exception e) {
                 System.out.println("\nNOT A VALID SELECTION\n");
+                sc.next();
             }
-            sc.next();
             if (choice < users.length && choice >= 0) {
                 if (users[choice] != null) {
                     String chooseAnother = "";

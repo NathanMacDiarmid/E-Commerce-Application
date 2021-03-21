@@ -2,7 +2,6 @@ package store;
 // Matthew Belanger 101144323
 // Nathan MacDiarmid 101098993
 
-import org.relaxng.datatype.DatatypeException;
 
 import java.util.ArrayList;
 
@@ -101,12 +100,10 @@ public class Inventory {
                 if (inventoryProducts.get(i).getId() == productID){
                     return inventoryStock.get(i);
                 }
-                else {
-                    throw new DatatypeException(" - this product does not exist.");
-                }
             }
+            throw new Exception(" - this product does not exist.");
         }
-        catch (DatatypeException e) {
+        catch (Exception e) {
             System.out.println("Product with id (" + productID + ")" + e.getMessage());
         }
 
@@ -141,12 +138,10 @@ public class Inventory {
                 if (inventoryProduct.getId() == productID) {
                     return inventoryProduct;
                 }
-                else {
-                    throw new DatatypeException(" - this product does not exist.");
-                }
             }
+            throw new Exception(" - this product does not exist.");
         }
-        catch (DatatypeException e) {
+        catch (Exception e) {
             System.out.println("Product with id (" + productID + ")" + e.getMessage());
         }
         return null;
