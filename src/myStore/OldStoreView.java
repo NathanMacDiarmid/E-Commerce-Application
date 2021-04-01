@@ -1,13 +1,10 @@
-package store;
+package myStore;
 // Nathan MacDiarmid 101098993
 // Matthew Belanger 101144323
 
-import jdk.internal.util.xml.impl.Input;
-
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class StoreView {
+public class OldStoreView {
     private StoreManager storeManager;
     private final int CART_ID;
 
@@ -18,7 +15,7 @@ public class StoreView {
      *
      * Raises a IllegalArgumentException if the id is negative
      */
-    public StoreView(StoreManager storeManager, int iD){
+    public OldStoreView(StoreManager storeManager, int iD){
         if (iD < 0) {
             throw new IllegalArgumentException("ID cannot be negative.");
         }
@@ -126,19 +123,20 @@ public class StoreView {
             return true;
         }
 
+        System.out.println("Not a valid command \n");
         return false;
     }
 
     public static void main(String[] args) {
         StoreManager sm = new StoreManager();
-        StoreView sv1 = new StoreView(sm, sm.assignNewCartID());
-        StoreView sv2 = new StoreView(sm, sm.assignNewCartID());
-        StoreView sv3 = new StoreView(sm, sm.assignNewCartID());
+        OldStoreView sv1 = new OldStoreView(sm, sm.assignNewCartID());
+        OldStoreView sv2 = new OldStoreView(sm, sm.assignNewCartID());
+        OldStoreView sv3 = new OldStoreView(sm, sm.assignNewCartID());
         Product p1 = new Product("apple", 1, 1.0f);
         Product p2 = new Product("banana", 2, 1.0f);
         sm.getInventory().addStock(p1, 30);
         sm.getInventory().addStock(p2, 30);
-        StoreView[] users = {sv1, sv2, sv3};
+        OldStoreView[] users = {sv1, sv2, sv3};
         int activeSV = users.length;
         Scanner sc = new Scanner(System.in);
         while (activeSV > 0) {
@@ -150,8 +148,8 @@ public class StoreView {
             }
             catch (Exception e) {
                 System.out.println("\nNOT A VALID SELECTION\n");
+                sc.next();
             }
-            sc.next();
             if (choice < users.length && choice >= 0) {
                 if (users[choice] != null) {
                     String chooseAnother = "";

@@ -1,4 +1,4 @@
-package store;
+package myStore;
 // Matthew Belanger 101144323
 // Nathan MacDiarmid 101098993
 
