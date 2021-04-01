@@ -4,8 +4,8 @@
 package storetest;
 import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import store.Product;
-import store.Inventory;
+import myStore.Product;
+import myStore.Inventory;
 
 public class InventoryTest {
     private static Inventory i1;

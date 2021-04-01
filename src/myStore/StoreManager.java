@@ -1,4 +1,4 @@
-package store;
+package myStore;
 // Nathan MacDiarmid 101098993
 // Matthew Belanger 101144323
 
@@ -41,6 +41,13 @@ public class StoreManager {
     }
 
     /**
+     * Returns the price for a given product ID
+     */
+    public float managerGetPrice(int productID) {
+        return this.inventory.getProductInfo(productID).getPrice();
+    }
+
+    /**
      * This method returns the total price of items in a specified cart
      * @param cartID
      * @return float
@@ -77,6 +84,29 @@ public class StoreManager {
             System.out.println(s);
         }
     }
+
+
+    /**
+     * Returns a string representation to use in StoreView
+     * @param cartID
+     * @return
+     */
+    public String returnCartRepresentation(int cartID){
+        String cartString = "<html>My Cart:<br>";
+
+        for (int i = 0; i < this.shoppingCarts.get(cartID).getProduct().size(); i++) {
+            String s = String.format(
+                    "%d | %s | $%.2f<br>",
+                    this.shoppingCarts.get(cartID).getStockList().get(i),
+                    this.shoppingCarts.get(cartID).getProduct().get(i).getName(),
+                    this.shoppingCarts.get(cartID).getProduct().get(i).getPrice()
+            );
+            cartString += s;
+        }
+
+        return cartString;
+    }
+
 
     /**
      * method to create a new store.ShoppingCart and add it too the shoppingCarts and return the unique
