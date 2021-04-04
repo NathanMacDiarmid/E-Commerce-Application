@@ -36,7 +36,7 @@ public class StoreView {
     }
 
     public ImageIcon getImage() throws IOException {
-        BufferedImage image = ImageIO.read(new File("src/resources/antiquebooks450.png"));
+        BufferedImage image = ImageIO.read(new File("src/myStore/resources/antiquebooks450.png"));
         Image img = image.getScaledInstance(150, 150, 20);
         ImageIcon photo = new ImageIcon(img);
         return photo;
