@@ -36,8 +36,8 @@ public class StoreManager {
     /**
      * Returns the stock for a given product ID
      */
-    public int managerGetStock(int productID) {
-        return this.inventory.getStock(productID);
+    public int managerGetStock(Product product) {
+        return this.inventory.getProductQuantity(product);
     }
 
     /**
@@ -123,13 +123,13 @@ public class StoreManager {
      * This method removes the required amount of product from inventory and adds it to the specified
      * cart, will return true if successful and false otherwise
      * @param cartID
-     * @param productID
+     * @param product
      * @param productAmount
      * @return boolean
      */
-    public boolean cartAddProduct(int cartID, int productID, int productAmount){
-        if(this.inventory.removeStock(productID, productAmount)){
-            this.shoppingCarts.get(cartID).addStock(this.inventory.getProductInfo(productID), productAmount);
+    public boolean cartAddProduct(int cartID, Product product, int productAmount){
+        if(this.inventory.removeProductQuantity(product, productAmount)){
+            this.shoppingCarts.get(cartID).addProductQuantity(this.inventory.getProductInfo(product.getId()), productAmount);
             return true;
         }
         return false;
@@ -139,13 +139,13 @@ public class StoreManager {
      * This method removes the required amount of product from the specified cart and adds it to the
      * inventory, will return true if successful and false otherwise
      * @param cartID
-     * @param productID
+     * @param product
      * @param productAmount
      * @return boolean
      */
-    public boolean cartRemoveProduct(int cartID, int productID, int productAmount){
-        if(this.shoppingCarts.get(cartID).removeStock(productID, productAmount)){
-            this.inventory.addStock(this.inventory.getProductInfo(productID), productAmount);
+    public boolean cartRemoveProduct(int cartID, Product product, int productAmount){
+        if(this.shoppingCarts.get(cartID).removeProductQuantity(product, productAmount)){
+            this.inventory.addProductQuantity(this.inventory.getProductInfo(product.getId()), productAmount);
             return true;
         }
         return false;
@@ -157,7 +157,7 @@ public class StoreManager {
      */
     public void cartQuit(int cartID){
         for(int i = 0; i < this.shoppingCarts.get(cartID).getProduct().size(); i++){
-            this.inventory.addStock(this.shoppingCarts.get(cartID).getProduct().get(i), this.shoppingCarts.get(cartID).getStockList().get(i));
+            this.inventory.addProductQuantity(this.shoppingCarts.get(cartID).getProduct().get(i), this.shoppingCarts.get(cartID).getStockList().get(i));
         }
     }
 

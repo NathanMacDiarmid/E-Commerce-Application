@@ -50,10 +50,10 @@ public class StoreView {
         Product p2 = new Product("SYSC2320", 2, 50.0f);
         Product p3 = new Product("CCDP2100", 3, 35.0f);
         Product p4 = new Product("COMP2804", 4, 80.0f);
-        storeManager.getInventory().addStock(p1, 30);
-        storeManager.getInventory().addStock(p2, 10);
-        storeManager.getInventory().addStock(p3, 20);
-        storeManager.getInventory().addStock(p4, 35);
+        storeManager.getInventory().addProductQuantity(p1, 30);
+        storeManager.getInventory().addProductQuantity(p2, 10);
+        storeManager.getInventory().addProductQuantity(p3, 20);
+        storeManager.getInventory().addProductQuantity(p4, 35);
         StoreView storeView = new StoreView(storeManager, storeManager.assignNewCartID());
         storeView.frame.setTitle("Client StoreView");
         storeView.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -107,7 +107,7 @@ public class StoreView {
 
         //create SYSC2004Panel
         JLabel SYSC2004Label1 = new JLabel("SYSC2004 Textbook");
-        JLabel SYSC2004Label2 = new JLabel("($" + storeManager.managerGetPrice(1) + ") - Stock:" + storeManager.managerGetStock(1));
+        JLabel SYSC2004Label2 = new JLabel("($" + storeManager.managerGetPrice(1) + ") - Stock:" + storeManager.managerGetStock(p1));
         JPanel SYSC2004LabelPanel = new JPanel(new BorderLayout());
         JLabel SYSC2004PictureLabel = new JLabel(storeView.getImage());
         JPanel SYSC2004PicturePanel = new JPanel();
@@ -118,8 +118,8 @@ public class StoreView {
         addSYSC2004Button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                storeView.storeManager.cartAddProduct(storeView.CART_ID, 1, 1);
-                SYSC2004Label2.setText("($" + storeManager.managerGetPrice(1) + ") - Stock:" + storeManager.managerGetStock(1));
+                storeView.storeManager.cartAddProduct(storeView.CART_ID, p1, 1);
+                SYSC2004Label2.setText("($" + storeManager.managerGetPrice(1) + ") - Stock:" + storeManager.managerGetStock(p1));
                 cartLabel.setText(storeManager.returnCartRepresentation(storeView.CART_ID));
             }
         });
@@ -127,8 +127,8 @@ public class StoreView {
         removeSYSC2004Button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                storeView.storeManager.cartRemoveProduct(storeView.CART_ID, 1, 1);
-                SYSC2004Label2.setText("($" + storeManager.managerGetPrice(1) + ") - Stock:" + storeManager.managerGetStock(1));
+                storeView.storeManager.cartRemoveProduct(storeView.CART_ID, p1, 1);
+                SYSC2004Label2.setText("($" + storeManager.managerGetPrice(1) + ") - Stock:" + storeManager.managerGetStock(p1));
                 cartLabel.setText(storeManager.returnCartRepresentation(storeView.CART_ID));
             }
         });
@@ -164,7 +164,7 @@ public class StoreView {
 
         //create SYSC2320Panel
         JLabel SYSC2320Label1 = new JLabel("SYSC2320 Textbook");
-        JLabel SYSC2320Label2 = new JLabel("($" + storeManager.managerGetPrice(2) + ") - Stock:" + storeManager.managerGetStock(2));
+        JLabel SYSC2320Label2 = new JLabel("($" + storeManager.managerGetPrice(2) + ") - Stock:" + storeManager.managerGetStock(p2));
         JPanel SYSC2320LabelPanel = new JPanel(new BorderLayout());
         JLabel SYSC2320PictureLabel = new JLabel(storeView.getImage());
         JPanel SYSC2320PicturePanel = new JPanel();
@@ -175,8 +175,8 @@ public class StoreView {
         addSYSC2320Button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                storeView.storeManager.cartAddProduct(storeView.CART_ID, 2, 1);
-                SYSC2320Label2.setText("($" + storeManager.managerGetPrice(2) + ") - Stock:" + storeManager.managerGetStock(2));
+                storeView.storeManager.cartAddProduct(storeView.CART_ID, p2, 1);
+                SYSC2320Label2.setText("($" + storeManager.managerGetPrice(2) + ") - Stock:" + storeManager.managerGetStock(p2));
                 cartLabel.setText(storeManager.returnCartRepresentation(storeView.CART_ID));
             }
         });
@@ -184,8 +184,8 @@ public class StoreView {
         removeSYSC2320Button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                storeView.storeManager.cartRemoveProduct(storeView.CART_ID, 2, 1);
-                SYSC2320Label2.setText("($" + storeManager.managerGetPrice(2) + ") - Stock:" + storeManager.managerGetStock(2));
+                storeView.storeManager.cartRemoveProduct(storeView.CART_ID, p2, 1);
+                SYSC2320Label2.setText("($" + storeManager.managerGetPrice(2) + ") - Stock:" + storeManager.managerGetStock(p2));
                 cartLabel.setText(storeManager.returnCartRepresentation(storeView.CART_ID));
             }
         });
@@ -223,7 +223,7 @@ public class StoreView {
 
         //create CCDP2100Panel
         JLabel CCDP2100Label1 = new JLabel("CCDP2100 Textbook");
-        JLabel CCDP2100Label2 = new JLabel("($" + storeManager.managerGetPrice(3) + ") - Stock:" + storeManager.managerGetStock(3));
+        JLabel CCDP2100Label2 = new JLabel("($" + storeManager.managerGetPrice(3) + ") - Stock:" + storeManager.managerGetStock(p3));
         JPanel CCDP2100LabelPanel = new JPanel(new BorderLayout());
         JLabel CCDP2100PictureLabel = new JLabel(storeView.getImage());
         JPanel CCDP2100PicturePanel = new JPanel();
@@ -234,8 +234,8 @@ public class StoreView {
         addCCDP2100Button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                storeView.storeManager.cartAddProduct(storeView.CART_ID, 3, 1);
-                CCDP2100Label2.setText("($" + storeManager.managerGetPrice(3) + ") - Stock:" + storeManager.managerGetStock(3));
+                storeView.storeManager.cartAddProduct(storeView.CART_ID, p3, 1);
+                CCDP2100Label2.setText("($" + storeManager.managerGetPrice(3) + ") - Stock:" + storeManager.managerGetStock(p3));
                 cartLabel.setText(storeManager.returnCartRepresentation(storeView.CART_ID));
             }
         });
@@ -243,8 +243,8 @@ public class StoreView {
         removeCCDP2100Button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                storeView.storeManager.cartRemoveProduct(storeView.CART_ID, 3, 1);
-                CCDP2100Label2.setText("($" + storeManager.managerGetPrice(3) + ") - Stock:" + storeManager.managerGetStock(3));
+                storeView.storeManager.cartRemoveProduct(storeView.CART_ID, p3, 1);
+                CCDP2100Label2.setText("($" + storeManager.managerGetPrice(3) + ") - Stock:" + storeManager.managerGetStock(p3));
                 cartLabel.setText(storeManager.returnCartRepresentation(storeView.CART_ID));
             }
         });
@@ -281,7 +281,7 @@ public class StoreView {
 
         //create COMP2804Panel
         JLabel COMP2804Label1 = new JLabel("COMP2804 Textbook");
-        JLabel COMP2804Label2 = new JLabel("($" + storeManager.managerGetPrice(4) + ") - Stock:" + storeManager.managerGetStock(4));
+        JLabel COMP2804Label2 = new JLabel("($" + storeManager.managerGetPrice(4) + ") - Stock:" + storeManager.managerGetStock(p4));
         JPanel COMP2804LabelPanel = new JPanel(new BorderLayout());
         JLabel COMP2804PictureLabel = new JLabel(storeView.getImage());
         JPanel COMP2804PicturePanel = new JPanel();
@@ -292,8 +292,8 @@ public class StoreView {
         addCOMP2804Button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                storeView.storeManager.cartAddProduct(storeView.CART_ID, 4, 1);
-                COMP2804Label2.setText("($" + storeManager.managerGetPrice(4) + ") - Stock:" + storeManager.managerGetStock(4));
+                storeView.storeManager.cartAddProduct(storeView.CART_ID, p4, 1);
+                COMP2804Label2.setText("($" + storeManager.managerGetPrice(4) + ") - Stock:" + storeManager.managerGetStock(p4));
                 cartLabel.setText(storeManager.returnCartRepresentation(storeView.CART_ID));
             }
         });
@@ -301,8 +301,8 @@ public class StoreView {
         removeCOMP2804Button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                storeView.storeManager.cartRemoveProduct(storeView.CART_ID, 4, 1);
-                COMP2804Label2.setText("($" + storeManager.managerGetPrice(4) + ") - Stock:" + storeManager.managerGetStock(4));
+                storeView.storeManager.cartRemoveProduct(storeView.CART_ID, p4, 1);
+                COMP2804Label2.setText("($" + storeManager.managerGetPrice(4) + ") - Stock:" + storeManager.managerGetStock(p4));
                 cartLabel.setText(storeManager.returnCartRepresentation(storeView.CART_ID));
             }
         });

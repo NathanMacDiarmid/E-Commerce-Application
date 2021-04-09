@@ -6,7 +6,7 @@ package myStore;
 import java.util.ArrayList;
 
 
-public class Inventory {
+public class Inventory implements ProductStockContainer{
 
     /**
      * Attributes are two ArrayLists, one to hold the store.Product objects and the other to hold the
@@ -18,7 +18,7 @@ public class Inventory {
     /**
      * main constructor
      */
-    public Inventory(){
+    public Inventory() {
         this.inventoryProducts = new ArrayList<>();
         this.inventoryStock = new ArrayList<>();
     }
@@ -27,9 +27,12 @@ public class Inventory {
      * If the store.Product object is already in the inventory then this method increases the stock,
      * if it is not then the store.Product object is added along with the stock.
      *
+     * Follows ProductStockContainer interface conventions
+     *
      * Raises errors if stockToAdd is negative and if the name of the product is null.
      */
-    public void addStock(Product product, int stockToAdd){
+    @Override
+    public void addProductQuantity(Product product, int stockToAdd){
         try {
             if (stockToAdd < 0) {
                 throw new IllegalArgumentException(" - cannot add negative product, please use the removeStock method.");
@@ -64,7 +67,8 @@ public class Inventory {
      *
      * Raise an error if stockToRemove is negative.
      */
-    public boolean removeStock(int productID, int stockToRemove) {
+    @Override
+    public boolean removeProductQuantity(Product product, int stockToRemove) {
         try {
             if (stockToRemove < 0) {
                 throw new IllegalArgumentException(" - cannot remove a negative number of stock.");
@@ -72,7 +76,7 @@ public class Inventory {
             else {
                 int previousStock = 0;
                 for (int i = 0; i < inventoryProducts.size(); i++) {
-                    if (inventoryProducts.get(i).getId() == productID) {
+                    if (inventoryProducts.get(i).getId() == product.getId()) {
                         if ((inventoryStock.get(i) - stockToRemove) >= 0) {
                             previousStock = inventoryStock.get(i);
                             inventoryStock.set(i, previousStock - stockToRemove);
@@ -82,7 +86,7 @@ public class Inventory {
                 }
             }
         } catch (IllegalArgumentException e1) {
-            System.out.println("Product with id (" + productID + ")" + e1.getMessage());
+            System.out.println("Product with id (" + product.getId() + ")" + e1.getMessage());
         }
 
         return false;
@@ -94,17 +98,18 @@ public class Inventory {
      * Raises a DatatypeException if the product id is not linked to a product
      * ie. the product doesn't exist
      */
-    public int getStock(int productID){
+    @Override
+    public int getProductQuantity(Product product){
         try {
             for (int i = 0; i < inventoryProducts.size(); i++){
-                if (inventoryProducts.get(i).getId() == productID){
+                if (inventoryProducts.get(i).getId() == product.getId()){
                     return inventoryStock.get(i);
                 }
             }
             throw new Exception(" - this product does not exist.");
         }
         catch (Exception e) {
-            System.out.println("Product with id (" + productID + ")" + e.getMessage());
+            System.out.println("Product with id (" + product.getId() + ")" + e.getMessage());
         }
 
         return -1;
@@ -165,8 +170,13 @@ public class Inventory {
         }
     }
 
-
-
-
-
+    /**
+     * returns the number of Products in the inventory
+     * Follows ProductStockContainer interface conventions
+     * @return int of the size of inventoryProducts
+     */
+    @Override
+    public int getNumOfProducts() {
+        return inventoryProducts.size();
+    }
 }

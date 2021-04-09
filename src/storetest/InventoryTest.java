@@ -14,6 +14,7 @@ public class InventoryTest {
     private static Inventory i4;
     private static Product p1;
     private static Product p2;
+    private static Product p5;
 
     /**
      * Initialize attributes
@@ -26,6 +27,7 @@ public class InventoryTest {
         i4 = new Inventory();
         p1 = new Product("Apples", 1, 2.0f);
         p2 = new Product("Bananas", 2, 3.0f);
+        p5 = new Product("Eggplant", 55, 3.0f);
     }
 
     /**
@@ -34,15 +36,15 @@ public class InventoryTest {
      */
     @Test
     public void testAddStock(){
-        i1.addStock(p1, 20);
+        i1.addProductQuantity(p1, 20);
         assertEquals(i1.getStockList().get(0), 20, "Inventory's addStock method is not adding the correct amount of inventory");
         assertEquals(i1.getProduct().get(0).getName(), p1.getName(), "Inventory's addStock method is not adding the product object to the list of products");
 
-        i1.addStock(p2, 10);
+        i1.addProductQuantity(p2, 10);
         assertEquals(i1.getStockList().get(1), 10, "Inventory's addStock method is not adding the correct amount of inventory");
         assertEquals(i1.getProduct().get(1).getName(), p2.getName(), "Inventory's addStock method is not adding the product object to the list of products");
 
-        i1.addStock(p2, 0);
+        i1.addProductQuantity(p2, 0);
         assertEquals(i1.getStockList().get(1), 10, "Inventory's addStock method is not adding the correct amount of inventory");
         assertEquals(i1.getProduct().get(1).getName(), p2.getName(), "Inventory's addStock method is not adding the product object to the list of products");
     }
@@ -53,19 +55,19 @@ public class InventoryTest {
      */
     @Test
     public void testRemoveStock(){
-        i2.addStock(p1, 20);
-        assertEquals(i2.removeStock(1, 20), true, "Inventory's removeStock is not returning the correct value");
+        i2.addProductQuantity(p1, 20);
+        assertEquals(i2.removeProductQuantity(p1, 20), true, "Inventory's removeStock is not returning the correct value");
         assertEquals(i2.getStockList().get(0), 0, "Inventory's removeStock is not removing the correct amount of stock");
-        assertEquals(i2.removeStock(1, 10), false, "Inventory's removeStock is not returning the correct value");
+        assertEquals(i2.removeProductQuantity(p1, 10), false, "Inventory's removeStock is not returning the correct value");
 
-        i2.addStock(p2, 10);
-        assertEquals(i2.removeStock(2, 5), true, "Inventory's removeStock is not returning the correct value");
+        i2.addProductQuantity(p2, 10);
+        assertEquals(i2.removeProductQuantity(p2, 5), true, "Inventory's removeStock is not returning the correct value");
         assertEquals(i2.getStockList().get(1), 5, "Inventory's removeStock is not removing the correct amount of stock");
 
-        assertEquals(i2.removeStock(2, 0), true, "Inventory's removeStock is not returning the correct value");
+        assertEquals(i2.removeProductQuantity(p2, 0), true, "Inventory's removeStock is not returning the correct value");
         assertEquals(i2.getStockList().get(1), 5, "Inventory's removeStock is not removing the correct amount of stock");
 
-        assertEquals(i2.removeStock(2, -10), false, "Inventory's removeStock is not returning the correct value");
+        assertEquals(i2.removeProductQuantity(p2, -10), false, "Inventory's removeStock is not returning the correct value");
     }
 
     /**
@@ -73,11 +75,11 @@ public class InventoryTest {
      */
     @Test
     public void testGetStock(){
-        i3.addStock(p1, 10);
-        i3.addStock(p2, 5);
-        assertEquals(i3.getStock(1), 10, "Inventory's getStock method is not returning the correct value");
-        assertEquals(i3.getStock(2), 5, "Inventory's getStock method is not returning the correct value");
-        assertEquals(i3.getStock(5), -1, "Inventory's getStock method is not returning the correct value");
+        i3.addProductQuantity(p1, 10);
+        i3.addProductQuantity(p2, 5);
+        assertEquals(i3.getProductQuantity(p1), 10, "Inventory's getStock method is not returning the correct value");
+        assertEquals(i3.getProductQuantity(p2), 5, "Inventory's getStock method is not returning the correct value");
+        assertEquals(i3.getProductQuantity(p5), -1, "Inventory's getStock method is not returning the correct value");
     }
 
     /**
@@ -85,8 +87,8 @@ public class InventoryTest {
      */
     @Test
     public void testGetProductInfo(){
-        i4.addStock(p1, 10);
-        i4.addStock(p2, 5);
+        i4.addProductQuantity(p1, 10);
+        i4.addProductQuantity(p2, 5);
         assertEquals(i4.getProductInfo(1), p1, "Inventory's getProductInfo method is not returning the correct object");
         assertEquals(i4.getProductInfo(2), p2, "Inventory's getProductInfo method is not returning the correct object");
         assertEquals(i4.getProductInfo(5), null, "Inventory's getProductInfo method is not returning the correct object");

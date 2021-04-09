@@ -48,24 +48,24 @@ public class StoreManagerTest {
      */
     @Test
     public void testCartAddProduct(){
-        assertEquals(s1.cartAddProduct(c1, 1, 10), false, "StoreManager's cartAddProduct method is not returning proper value");
-        s1.getInventory().addStock(p1, 10);
-        assertEquals(s1.cartAddProduct(c1, 1, 10), true, "StoreManager's cartAddProduct method is not returning proper value");
-        assertEquals(s1.getShoppingCarts().get(c1).getStock(1), 10, "StoreManager's cartAddProduct method is not adding products to cart");
-        assertEquals(s1.getInventory().getStock(1), 0, "StoreManager's cartAddProduct method is not removing products from inventory");
+        assertEquals(s1.cartAddProduct(c1, p1, 10), false, "StoreManager's cartAddProduct method is not returning proper value");
+        s1.getInventory().addProductQuantity(p1, 10);
+        assertEquals(s1.cartAddProduct(c1, p1, 10), true, "StoreManager's cartAddProduct method is not returning proper value");
+        assertEquals(s1.getShoppingCarts().get(c1).getProductQuantity(p1), 10, "StoreManager's cartAddProduct method is not adding products to cart");
+        assertEquals(s1.getInventory().getProductQuantity(p1), 0, "StoreManager's cartAddProduct method is not removing products from inventory");
 
-        s1.getInventory().addStock(p2, 30);
-        assertEquals(s1.cartAddProduct(c1, 2, 20), true, "StoreManager's cartAddProduct method is not returning proper value");
-        assertEquals(s1.getShoppingCarts().get(c1).getStock(2), 20, "StoreManager's cartAddProduct method is not adding products to cart");
-        assertEquals(s1.getInventory().getStock(2), 10, "StoreManager's cartAddProduct method is not removing products from inventory");
+        s1.getInventory().addProductQuantity(p2, 30);
+        assertEquals(s1.cartAddProduct(c1, p2, 20), true, "StoreManager's cartAddProduct method is not returning proper value");
+        assertEquals(s1.getShoppingCarts().get(c1).getProductQuantity(p2), 20, "StoreManager's cartAddProduct method is not adding products to cart");
+        assertEquals(s1.getInventory().getProductQuantity(p2), 10, "StoreManager's cartAddProduct method is not removing products from inventory");
 
-        assertEquals(s1.cartAddProduct(c1, 2, 0), true, "StoreManager's cartAddProduct method is not returning proper value");
-        assertEquals(s1.getShoppingCarts().get(c1).getStock(2), 20, "StoreManager's cartAddProduct method is not adding products to cart");
-        assertEquals(s1.getInventory().getStock(2), 10, "StoreManager's cartAddProduct method is not removing products from inventory");
+        assertEquals(s1.cartAddProduct(c1, p2, 0), true, "StoreManager's cartAddProduct method is not returning proper value");
+        assertEquals(s1.getShoppingCarts().get(c1).getProductQuantity(p2), 20, "StoreManager's cartAddProduct method is not adding products to cart");
+        assertEquals(s1.getInventory().getProductQuantity(p2), 10, "StoreManager's cartAddProduct method is not removing products from inventory");
 
-        assertEquals(s1.cartAddProduct(c1, 2, -10), false, "StoreManager's cartAddProduct method is not returning proper value");
-        assertEquals(s1.getShoppingCarts().get(c1).getStock(2), 20, "StoreManager's cartAddProduct method is not adding products to cart");
-        assertEquals(s1.getInventory().getStock(2), 10, "StoreManager's cartAddProduct method is not removing products from inventory");
+        assertEquals(s1.cartAddProduct(c1, p2, -10), false, "StoreManager's cartAddProduct method is not returning proper value");
+        assertEquals(s1.getShoppingCarts().get(c1).getProductQuantity(p2), 20, "StoreManager's cartAddProduct method is not adding products to cart");
+        assertEquals(s1.getInventory().getProductQuantity(p2), 10, "StoreManager's cartAddProduct method is not removing products from inventory");
     }
 
     /**
@@ -73,10 +73,10 @@ public class StoreManagerTest {
      */
     @Test
     public void testGetPrice(){
-        s1.getInventory().addStock(p1, 20);
-        s1.getInventory().addStock(p2, 5);
-        s1.cartAddProduct(c2, 1, 20);
-        s1.cartAddProduct(c2, 2, 5);
+        s1.getInventory().addProductQuantity(p1, 20);
+        s1.getInventory().addProductQuantity(p2, 5);
+        s1.cartAddProduct(c2, p1, 20);
+        s1.cartAddProduct(c2, p2, 5);
         assertEquals(s1.getPrice(c2), 55.0f, "StoreManager's getPrice method is not returning proper price");
     }
 
@@ -86,26 +86,26 @@ public class StoreManagerTest {
      */
     @Test
     public void testCartRemoveProducts(){
-        assertEquals(s1.cartRemoveProduct(c3, 3, 10), false, "StoreManager's cartRemoveProduct method is not returning proper value");
-        s1.getInventory().addStock(p3, 10);
-        s1.cartAddProduct(c3, 3, 10);
-        assertEquals(s1.cartRemoveProduct(c3, 3, 10), true, "StoreManager's cartRemoveProduct method is not returning proper value");
-        assertEquals(s1.getShoppingCarts().get(c3).getStock(3), 0, "StoreManager's cartRemoveProduct method is not removing products to cart");
-        assertEquals(s1.getInventory().getStock(3), 10, "StoreManager's cartRemoveProduct method is not adding products from inventory");
+        assertEquals(s1.cartRemoveProduct(c3, p3, 10), false, "StoreManager's cartRemoveProduct method is not returning proper value");
+        s1.getInventory().addProductQuantity(p3, 10);
+        s1.cartAddProduct(c3, p3, 10);
+        assertEquals(s1.cartRemoveProduct(c3, p3, 10), true, "StoreManager's cartRemoveProduct method is not returning proper value");
+        assertEquals(s1.getShoppingCarts().get(c3).getProductQuantity(p3), 0, "StoreManager's cartRemoveProduct method is not removing products to cart");
+        assertEquals(s1.getInventory().getProductQuantity(p3), 10, "StoreManager's cartRemoveProduct method is not adding products from inventory");
 
-        s1.getInventory().addStock(p4, 20);
-        s1.cartAddProduct(c3, 4, 20);
-        assertEquals(s1.cartRemoveProduct(c3, 4, 5), true, "StoreManager's cartRemoveProduct method is not returning proper value");
-        assertEquals(s1.getShoppingCarts().get(c3).getStock(4), 15, "StoreManager's cartRemoveProduct method is not removing products to cart");
-        assertEquals(s1.getInventory().getStock(4), 5, "StoreManager's cartRemoveProduct method is not adding products from inventory");
+        s1.getInventory().addProductQuantity(p4, 20);
+        s1.cartAddProduct(c3, p4, 20);
+        assertEquals(s1.cartRemoveProduct(c3, p4, 5), true, "StoreManager's cartRemoveProduct method is not returning proper value");
+        assertEquals(s1.getShoppingCarts().get(c3).getProductQuantity(p4), 15, "StoreManager's cartRemoveProduct method is not removing products to cart");
+        assertEquals(s1.getInventory().getProductQuantity(p4), 5, "StoreManager's cartRemoveProduct method is not adding products from inventory");
 
-        assertEquals(s1.cartRemoveProduct(c3, 4, 0), true, "StoreManager's cartRemoveProduct method is not returning proper value");
-        assertEquals(s1.getShoppingCarts().get(c3).getStock(4), 15, "StoreManager's cartRemoveProduct method is not removing products to cart");
-        assertEquals(s1.getInventory().getStock(4), 5, "StoreManager's cartRemoveProduct method is not adding products from inventory");
+        assertEquals(s1.cartRemoveProduct(c3, p4, 0), true, "StoreManager's cartRemoveProduct method is not returning proper value");
+        assertEquals(s1.getShoppingCarts().get(c3).getProductQuantity(p4), 15, "StoreManager's cartRemoveProduct method is not removing products to cart");
+        assertEquals(s1.getInventory().getProductQuantity(p4), 5, "StoreManager's cartRemoveProduct method is not adding products from inventory");
 
-        assertEquals(s1.cartRemoveProduct(c3, 4, -10), false, "StoreManager's cartRemoveProduct method is not returning proper value");
-        assertEquals(s1.getShoppingCarts().get(c3).getStock(4), 15, "StoreManager's cartRemoveProduct method is not removing products to cart");
-        assertEquals(s1.getInventory().getStock(4), 5, "StoreManager's cartRemoveProduct method is not adding products from inventory");
+        assertEquals(s1.cartRemoveProduct(c3, p4, -10), false, "StoreManager's cartRemoveProduct method is not returning proper value");
+        assertEquals(s1.getShoppingCarts().get(c3).getProductQuantity(p4), 15, "StoreManager's cartRemoveProduct method is not removing products to cart");
+        assertEquals(s1.getInventory().getProductQuantity(p4), 5, "StoreManager's cartRemoveProduct method is not adding products from inventory");
 
 
     }
