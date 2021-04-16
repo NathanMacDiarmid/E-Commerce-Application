@@ -78,8 +78,8 @@ public class StoreView {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (JOptionPane.showConfirmDialog(storeView.frame,
-                         storeManager.returnCartRepresentation(storeView.CART_ID) + "\n\n"
-                + "Total: " + "$" + storeManager.getPrice(storeView.CART_ID), "Checkout", JOptionPane.OK_CANCEL_OPTION)
+                        storeManager.returnCartRepresentation(storeView.CART_ID) + "\n\n"
+                                + "Total: " + "$" + storeManager.getPrice(storeView.CART_ID), "Checkout", JOptionPane.OK_CANCEL_OPTION)
                         == JOptionPane.OK_OPTION) {
                     storeView.frame.setVisible(false);
                     storeView.frame.dispose();
@@ -92,7 +92,7 @@ public class StoreView {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (JOptionPane.showConfirmDialog(storeView.frame, "Are you sure you want to quit?", "Quit", JOptionPane.YES_NO_OPTION)
-                    == JOptionPane.OK_OPTION) {
+                        == JOptionPane.OK_OPTION) {
                     storeView.frame.setVisible(false);
                     storeView.frame.dispose();
                 }
@@ -195,7 +195,7 @@ public class StoreView {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JOptionPane.showConfirmDialog(storeView.frame, "This textbook for SYSC2320, Computer Organization\n" +
-                        "and Architecture, will aide the student in understanding course material.", "SYSC2320 Textbook Details",
+                                "and Architecture, will aide the student in understanding course material.", "SYSC2320 Textbook Details",
                         JOptionPane.DEFAULT_OPTION);
             }
         });
@@ -253,7 +253,7 @@ public class StoreView {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JOptionPane.showConfirmDialog(storeView.frame, "This textbook for CCDP2100, Communications for\n" +
-                        "Engineers, will aide the student in understanding course material.", "CCDP2100 Textbook Details",
+                                "Engineers, will aide the student in understanding course material.", "CCDP2100 Textbook Details",
                         JOptionPane.DEFAULT_OPTION);
             }
         });
@@ -311,7 +311,7 @@ public class StoreView {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JOptionPane.showConfirmDialog(storeView.frame, "This textbook for COMP2804, Discrete Structures II,\n" +
-                        "will aide the student in understanding course material.", "COMP2804 Textbook Details",
+                                "will aide the student in understanding course material.", "COMP2804 Textbook Details",
                         JOptionPane.DEFAULT_OPTION);
             }
         });
